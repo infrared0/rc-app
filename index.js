@@ -18,17 +18,27 @@ app.get('/get', (req, res) => {
     console.log(`get key value`);
     for (const key in req.query) {
         console.log(key, keyvalmap.get(key));
-	    res.send(`[Gotten] Key: ${key}; Value: ${keyvalmap.get(key)}`)
+	    res.send(`[Gotten] Key: ${key}; Value: ${keyvalmap.get(key)}\n`)
     };
 });
 
 // post handlers
 app.post('/set', (req, res) => {
-    console.log(`set key value`);
+    console.log(`set key value using post`);
     for (const key in req.query) {
         console.log(key, req.query[key]);
         keyvalmap.set(key, req.query[key]);
-	    res.send(`[Setted] Key: ${key}; Value: ${keyvalmap.get(key)}`)
+	    res.send(`[Setted using POST] Key: ${key}; Value: ${keyvalmap.get(key)}\n`)
+    };
+});
+
+// put handlers
+app.put('/set', (req, res) => {
+    console.log(`set key value using put`);
+    for (const key in req.query) {
+        console.log(key, req.query[key]);
+        keyvalmap.set(key, req.query[key]);
+	    res.send(`[Setted using PUT] Key: ${key}; Value: ${keyvalmap.get(key)}\n`)
     };
 });
 
