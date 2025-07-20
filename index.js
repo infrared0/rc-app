@@ -1,6 +1,8 @@
 // imports
 import express from "express";
 import messages from "./messages.js";
+import fs from 'fs'; //import * as fs from "node:fs";
+import path from "path";
 
 // init app
 const PORT = 4000;
@@ -8,6 +10,26 @@ const app = express();
 
 // memory store
 const keyvalmap = new Map();
+
+// file write
+const __dirname = path.resolve();
+var writepath = path.join(__dirname, 'test.txt');
+
+fs.appendFile(writepath, "\ntest text\n", function (err) {
+	if (err) {
+		return console.error(err);
+	}
+
+	console.log("Data appended successfully!");
+	console.log("Let's read newly written data");
+
+	fs.readFile(writepath, function (err, data) {
+		if (err) {
+			return console.error(err);
+		}
+		console.log("Asynchronous read: " + data.toString());
+	});
+});
 
 // routing path
 app.get('/', (req, res) => {
